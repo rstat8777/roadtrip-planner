@@ -12,19 +12,54 @@
     <main>
         <h1>Roadtrip Planner!</h1>
         <div>(this div contains a description)</div>
-        <span>
-            <p>City:</p>
-            <input type="form" placeholder="Here is the form for a City"></input>
-        </span>
-        <p>State:</p>
-            <input type="form" placeholder="Here is the form for a State"></input>
-        </span>
-        <span>
-            <p>ZIP:</p>
-            <input type="form" placeholder="Here is the form for a zipcode"></input>
-        </span>
+        <div>
+            <p>Origin:</p>
+            <span>
+                <p>Street Address:</p>
+                <input type="form" id="origin-street" placeholder="Here is the form for the Street"></input>
+            </span>
+            <span>
+                <p>City:</p>
+                <input type="form" id="origin-city" placeholder="Here is the form for a City"></input>
+            </span>
+                <p>State:</p>
+                <input type="form" id="origin-state" placeholder="Here is the form for a State"></input>
+            </span>
+             <span>
+                <p>ZIP:</p>
+                <input type="form" id="origin-zip" placeholder="Here is the form for a zipcode"></input>
+            </span>
+        </div>
+        <div>
+            <p>Destination:</p>
+            <span>
+                <p>Street Address:</p>
+                <input type="form" id="destination-street" placeholder="Here is the form for the Street"></input>
+            </span>
+            <span>
+                <p>City:</p>
+                <input type="form" id="destination-city" placeholder="Here is the form for a City"></input>
+            </span>
+                <p>State:</p>
+                <input type="form" id="destination-state" placeholder="Here is the form for a State"></input>
+            </span>
+             <span>
+                <p>ZIP:</p>
+                <input type="form" id="destination-zip" placeholder="Here is the form for a zipcode"></input>
+            </span>
+        </div>
         <br>
-        <button name="Go!">Go!</button>
+        <div><button name="Go!" id="go">Go!</button></div>
+
+        <div id="directions-header">
+            <!-- header -->
+        </div>
+        <div id="directions-spelled-out">
+            <!-- directions -->
+        </div>
+        <div id="map">
+            <!-- map -->
+        </div>
     </main>
     <script src="./assets/script.js"></script>
 </body>
