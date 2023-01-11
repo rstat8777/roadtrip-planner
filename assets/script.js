@@ -45,3 +45,5 @@ localStorage.setItem("startPoint", inputStartPoint);
 localStorage.setItem("destination", inputDestination);
 
 //change localstorage to query parameters and use localstorage for history
+
+
