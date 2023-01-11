@@ -1,10 +1,51 @@
-console.log("hello, world!")
-
 
 // grab user input from forms 
 
-let inputStartPoint = document.getElementById("inputStartPoint");
-let inputDestination = document.getElementById("inputDestination");
+
+
+
+// button stuff
+
+document.getElementById("go").onclick = function() {
+
+
+  let originStreet = document.getElementById("origin-street").value;
+  let originCity = document.getElementById("origin-city").value;
+  let originState = document.getElementById("origin-state").value;
+  let originZip = document.getElementById("origin-zip").value;
+  let destinationStreet = document.getElementById("destination-street").value;
+  let destinationCity = document.getElementById("destination-city").value;
+  let destinationState = document.getElementById("destination-state").value;
+  let destinationZip = document.getElementById("destination-zip").value;
+  
+  
+  localStorage.setItem("originStreet", originStreet);
+  localStorage.setItem("originCity", originCity);
+  localStorage.setItem("originState", originState);
+  localStorage.setItem("originZip", originZip);
+  localStorage.setItem("destinationStreet", destinationStreet);
+  localStorage.setItem("destinationCity", destinationCity);
+  localStorage.setItem("destinationState", destinationState);
+  localStorage.setItem("destinationZip", destinationZip);
+  
+  location.href= "./results.html";
+  
+  
+  };
+
+
+
+
+// let go = document.querySelector("#go")
+
+
+// go.addEventListener('click', function() {
+
+
+
+// }
+// )
+// console.log(document.getElementById("origin-street"));
 
 
 
@@ -15,7 +56,7 @@ fetch('https://www.google.com/maps/embed/v1/?key=AIzaSyDq4dGiAqsyOEGidDmskey1U6g
 
 //fetch geocode API
 
-fetch('http://api.openweathermap.org/geo/1.0/direct?q=detroit,US-MI,USA&limit=5&appid=dcf2daf93d72ecbb94572260babdabff')
+fetch('http://api.openweathermap.org/geo/1.0/direct?q=detroit,US-' + originState + ',USA&limit=5&appid=dcf2daf93d72ecbb94572260babdabff')
   .then((response) => response.json())
   .then((data) => console.log(data));
 
@@ -45,7 +86,13 @@ fetch('https://api.openweathermap.org/data/2.5/weather?lat=42.33&lon=83.05&appid
 
 //function to display map
 
-localStorage.setItem("startPoint", inputStartPoint);
-localStorage.setItem("destination", inputDestination);
+localStorage.setItem("originStreet", originStreet);
+localStorage.setItem("originCity", originCity);
+localStorage.setItem("originState", originState);
+localStorage.setItem("originZip", originZip);
+localStorage.setItem("destinationStreet", destinationStreet);
+localStorage.setItem("destinationCity", destinationCity);
+localStorage.setItem("destinationState", destinationState);
+localStorage.setItem("destinationZip", destinationZip);
 
 //change localstorage to query parameters and use localstorage for history
