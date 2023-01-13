@@ -28,7 +28,7 @@ document.getElementById("go").onclick = function() {
   localStorage.setItem("destinationState", destinationState);
   localStorage.setItem("destinationZip", destinationZip);
   
-  location.href= "./results.html";
+  // location.href= "./results.html";
   
   
   };
