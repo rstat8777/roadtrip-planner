@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/reset.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Roadtrip Planner- Plan Your Roadtrip with Weather Updates</title>
 </head>
 <body>
     <main>
-        <h1>Roadtrip Planner!</h1>
-        <div>(this div contains a description)</div>
-        <div>
+        <h1 class="is-size-1">Roadtrip Planner!</h1>
+        <div><p>Where did you come from, where did you go?</p></div>
+        <div class="is-flex" class="is-flex-direction-row">
             <p>Origin:</p>
             <span>
                 <p>Street Address:</p>
@@ -30,7 +31,7 @@
                 <input type="form" id="origin-zip" placeholder="Here is the form for a zipcode"></input>
             </span>
         </div>
-        <div>
+        <div class="is-flex" class="is-flex-direction-row">
             <p>Destination:</p>
             <span>
                 <p>Street Address:</p>
@@ -52,12 +53,15 @@
         <div><button name="Go!" id="go">Go!</button></div>
 
         <div id="directions-header">
+            <p>(this is a placeholder for the map title)</p>
             <!-- header -->
         </div>
         <div id="directions-spelled-out">
+            <p>(this is a placeholder for the directions)</p>
             <!-- directions -->
         </div>
         <div id="map">
+            <img src="./assets/placeholder.jpg" />
             <!-- map -->
         </div>
     </main>
