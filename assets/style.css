@@ -1,3 +1,33 @@
 * {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+body {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: #133d32;
+}
+
+.center {
+    justify-content: center;
+}
+
+.size-3-padding {
+    padding: 24px;
+}
+
+button {
+    height: 60px;
+    width: 180px;
+    border-radius: 10%;
+}
+
+input {
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+}
+
+img {
+    margin-top: 20px;
+}

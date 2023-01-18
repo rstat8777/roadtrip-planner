@@ -1,7 +1,15 @@
-
 // grab user input from forms when go button is clicked
-document.getElementById("go").onclick = function() {
+function kelvin(x) {
+  let result = Math.round(((x - 273.15) * 1.8) + 32);
+  console.log(result);
+  return result;
+}
 
+document.getElementById("go").onclick = function() {
+  let outputOrigin = document.getElementById("origin-weather");
+  outputOrigin.innerText = "";
+  let outputDestination = document.getElementById("destination-weather");
+  outputDestination.innerText = "";
 
   let originStreet = document.getElementById("origin-street").value;
   let originCity = document.getElementById("origin-city").value;
@@ -12,7 +20,13 @@ document.getElementById("go").onclick = function() {
   let destinationState = document.getElementById("destination-state").value;
   let destinationZip = document.getElementById("destination-zip").value;
   
-  
+  if (!originCity || !originStreet || !originState || !originZip || !destinationStreet || !destinationCity || !destinationState || !destinationZip) {
+    let outputOrigin = document.getElementById("origin-weather");
+    const originPrintContent = document.createTextNode("Please complete the form.");
+    outputOrigin.appendChild(originPrintContent);
+    return;
+  }
+
   localStorage.setItem("originStreet", originStreet);
   localStorage.setItem("originCity", originCity);
   localStorage.setItem("originState", originState);
@@ -22,27 +36,13 @@ document.getElementById("go").onclick = function() {
   localStorage.setItem("destinationState", destinationState);
   localStorage.setItem("destinationZip", destinationZip);
   
-  // location.href= "./results.html";
-  
   initialize();
   };
 
 
-
-
-// let go = document.querySelector("#go")
-
-
-// go.addEventListener('click', function() {
-
-
-
-// }
-// )
 // console.log(document.getElementById("origin-street"));
 
-function initialize() {
-
+async function initialize() {
   let originStreet = localStorage.getItem("originStreet");
   let originCity = localStorage.getItem("originCity");
   let originState = localStorage.getItem("originState");
@@ -57,24 +57,64 @@ function initialize() {
 //   .then((data) => console.log(data));
 
 
+
+// grab lat and lon from json
+function pullOriginWeather(lat, lon) {
+  fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=dcf2daf93d72ecbb94572260babdabff')
+  .then((response) => response.json())
+  .then((data) => {
+    let weather = data.main;
+    localStorage.setItem("originWeather", JSON.stringify(weather));
+    console.log(data)
+  })
+}
+
+// grab lat and lon from json
+function pullDestinationWeather(lat, lon) {
+  fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=dcf2daf93d72ecbb94572260babdabff')
+  .then((response) => response.json())
+  .then((data) => {
+    let weather = data.main;
+    localStorage.setItem("destinationWeather", JSON.stringify(weather));
+    console.log(data)
+  })
+}
+
+
+
+async function printWeather() {
+  //grab the weather objects from local storage
+  console.log(localStorage.getItem("originWeather"));
+  console.log(localStorage.getItem("destinationWeather"));
+  let outputOrigin = document.getElementById("origin-weather");
+  let outputDestination = document.getElementById("destination-weather");
+
+  let originWeather = JSON.parse(localStorage.getItem("originWeather"))
+  let destinationWeather = JSON.parse(localStorage.getItem("destinationWeather"))
+  console.log(originWeather);
+  console.log(destinationWeather);
+
+  //append them into the HTML document
+  const originPrintContent = document.createTextNode("The temperature in " + originCity + " is " + kelvin(originWeather.temp) + " with a high of " + kelvin(originWeather.temp_max) + " and a low of " + kelvin(originWeather.temp_min));
+  const destinationPrintContent = document.createTextNode("The temperature in " + destinationCity + " is " + kelvin(destinationWeather.temp) + " with a high of " + kelvin(destinationWeather.temp_max) + " and a low of " + kelvin(destinationWeather.temp_min));
+
+  outputOrigin.appendChild(originPrintContent);
+  outputDestination.appendChild(destinationPrintContent);
+ 
+  
+
+}
 // origin fetch:
   fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + originCity + ',US-' + originState + ',USA&limit=1&appid=dcf2daf93d72ecbb94572260babdabff')
   .then((response) => response.json())
   .then((data) => {
     let lat = data[0].lat;
     let lon = data[0].lon;
-    pullWeather(lat, lon);
+    pullOriginWeather(lat, lon);
+    console.log(data);
   });
 
 //print origin weather to page somehow
-
-
-// grab lat and lon from json
-  function pullWeather(lat,lon) {
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=dcf2daf93d72ecbb94572260babdabff')
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-  }
 
 // destination fetch:
   fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + destinationCity + ',US-' + destinationState + ',USA&limit=1&appid=dcf2daf93d72ecbb94572260babdabff')
@@ -82,12 +122,16 @@ function initialize() {
   .then((data) => {
   let lat = data[0].lat;
   let lon = data[0].lon;
-  pullWeather(lat, lon);
-  });
+  pullDestinationWeather(lat, lon);
+  console.log(data);
+  })
+  .then
 
-//print destination weather to page somehow
 
+await printWeather();
 } 
+
+
 
 
 // this below would be for the hourly forecast
