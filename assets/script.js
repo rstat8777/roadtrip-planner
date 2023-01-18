@@ -1,4 +1,3 @@
-
 // grab user input from forms when go button is clicked
 function kelvin(x) {
   let result = Math.round(((x - 273.15) * 1.8) + 32);
@@ -6,10 +5,11 @@ function kelvin(x) {
   return result;
 }
 
-
-
 document.getElementById("go").onclick = function() {
-
+  let outputOrigin = document.getElementById("origin-weather");
+  outputOrigin.innerText = "";
+  let outputDestination = document.getElementById("destination-weather");
+  outputDestination.innerText = "";
 
   let originStreet = document.getElementById("origin-street").value;
   let originCity = document.getElementById("origin-city").value;
@@ -20,6 +20,13 @@ document.getElementById("go").onclick = function() {
   let destinationState = document.getElementById("destination-state").value;
   let destinationZip = document.getElementById("destination-zip").value;
   
+  if (!originCity || !originStreet || !originState || !originZip || !destinationStreet || !destinationCity || !destinationState || !destinationZip) {
+    let outputOrigin = document.getElementById("origin-weather");
+    const originPrintContent = document.createTextNode("Please complete the form.");
+    outputOrigin.appendChild(originPrintContent);
+    return;
+  }
+
   localStorage.setItem("originStreet", originStreet);
   localStorage.setItem("originCity", originCity);
   localStorage.setItem("originState", originState);
@@ -29,23 +36,13 @@ document.getElementById("go").onclick = function() {
   localStorage.setItem("destinationState", destinationState);
   localStorage.setItem("destinationZip", destinationZip);
   
-  // location.href= "./results.html";
-  
   initialize();
   };
 
 
-
-// let go = document.querySelector("#go")
-
-// go.addEventListener('click', function() {
-
-// }
-// )
 // console.log(document.getElementById("origin-street"));
 
 async function initialize() {
-
   let originStreet = localStorage.getItem("originStreet");
   let originCity = localStorage.getItem("originCity");
   let originState = localStorage.getItem("originState");
